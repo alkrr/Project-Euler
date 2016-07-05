@@ -11,29 +11,27 @@ Answer: 233168.0
 Int, Int -> Float
 Takes a limit n and a value mul as input, returns the sum of all multiples of mul
 in range [0, n]
-
-Call gp_sum in following way:
-
->> gp_sum(999, 3) + gp_sum(999, 5) - gp_sum(999, 15)
->> (output) 
-233168.0
 """
 
-def gp_sum(n, mul):
-    if mul == 1:         # edge case to avoid division by 0
+def ap_sum(n, mul):
+    n = n - 1
+    if mul == 1:         # edge case to avoid division by 0 when mul = 1
         return n
     number_terms = n / mul
     last_term = mul * number_terms
-    first_term = mul
-    sum2 = 0.5 * (first_term + last_term) * number_terms 
+    first_term = mul 
+    sum = 0.5 * (first_term + last_term) * number_terms 
     return sum
 
 # gives off by one error    
-def gp_sum_1(n, mul):
+def ap_sum1(n, mul):
+    n = n - 1
     if mul == 1:         # edge case to avoid division by 0
         return n
     number_terms = n / mul
     last_term = mul * number_terms
-    first_term = mul
+    first_term = mul * 1.0
     sum = (first_term + last_term) * (number_terms / 2)     #off by one error
     return sum
+    
+print "sum of all the multiples of 3 or 5 below 1000:    " + str(ap_sum(1000, 3) + ap_sum(1000, 5) - ap_sum(1000, 15))
